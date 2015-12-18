@@ -24,8 +24,11 @@ namespace FINAL_GAME
                 Console.WriteLine("                                                                                             ");
                 Console.WriteLine("                                 Miguel Favero Studios                                       ");
                 Console.WriteLine("                                                                                             ");
-                Console.WriteLine("                         Disclaimer, I know how to spell and                                 ");
-                Console.WriteLine("               any spelling/grammer mistakes in this game are intentional.                   ");
+                Console.WriteLine("   ~~~~~~~                 Disclaimer, I know how to spell and                    ~~~~~~~    ");
+                Console.WriteLine("   ~~~~~~~       any spelling/grammer mistakes in this game are intentional.      ~~~~~~~    ");
+                Console.WriteLine("                                                                                             ");
+                Console.WriteLine("                                                                                             ");
+                Console.WriteLine("   ~~~~~~~~              Please enlarge the screen before playing.                ~~~~~~~    ");
                 Console.WriteLine("                                                                                             ");
                 Console.WriteLine("                                     1)New Game                                              ");
                 Console.WriteLine("                                                                                             ");
@@ -58,6 +61,7 @@ namespace FINAL_GAME
             int playerChoice = 0; //variables for player input for the rest of the game
             Player player = new Player(20, 0, 1); //calling new player, variables will always stay the same. variables for hp, score and level
             Enemy ChefDee = new Enemy(1, 3, 8, 150, 301); //calling a new enemy type, variables for HP, two damage variables and two score variables
+            Enemy WaterBeast = new Enemy(2, 7, 10, 200, 450);
 
 
             //main game loop begins
@@ -236,8 +240,9 @@ namespace FINAL_GAME
                     Console.Clear();
                     Console.WriteLine();
                     Console.WriteLine("Chef Dee strikes quickly and true, the blade catching your arm.");
-                    Console.WriteLine("You hesitate breifly from the pain but it's all the time your enemy needs");
+                    Console.WriteLine("You hesitate breifly from the pain but it's all the time your enemy needs.");
                     Console.WriteLine("She grabs your hair and pulls you down, before bringing the blade down to your neck.");
+                    Console.WriteLine();
                     Console.WriteLine();
                     Console.WriteLine("                                    YOU ARE DEAD.                                                    ");
                     Console.WriteLine("Press ENTER to close the game.");
@@ -291,7 +296,7 @@ namespace FINAL_GAME
 
                 Console.Clear();
                 Console.WriteLine();
-                Console.WriteLine("You turn into a new hallway and at the end of the hallway you see an open door");
+                Console.WriteLine("You turn into a new hallway and at the end of the hallway you see an open door.");
                 Console.WriteLine("You're interested to see water flowing out of the room. DJKhaled is walking towards it.");
                 Console.WriteLine("Following behind DJKhaled, you look around yourself.");
                 Console.WriteLine("You see a toolbox on top of a chest in the hallway. It has a dirty trowel beside it.");
@@ -304,6 +309,8 @@ namespace FINAL_GAME
                 while (playerChoice != 1 && playerChoice != 2)
                 {
                     Console.Clear();
+                    Console.WriteLine();
+                    Console.WriteLine("Invalid input. Try again.");
                     Console.WriteLine();
                     Console.WriteLine("You see a toolbox on top of a chest in the hallway. It has a dirty trowel beside it.");
                     Console.WriteLine();
@@ -400,7 +407,9 @@ namespace FINAL_GAME
                 {
                     Console.Clear();
                     Console.WriteLine();
-                    Console.WriteLine("You turn off the tap. ")
+                    Console.WriteLine("You turn off the tap. 'What a waste of water' you think to yourself.");
+                    Console.WriteLine("Barely having time to turn around you hear an inhumane sound.");
+
                 }
                 else if (playerChoice == 2 && player.Inventory != "GLOVES")
                 {
@@ -429,14 +438,185 @@ namespace FINAL_GAME
                     Console.WriteLine("You remember about the open tap. You take one last breath before the water closes the gap above your head.");
                     Console.WriteLine("You dive down to the bathtub. The last chance you have is to turn off the tap!");
                     Console.WriteLine();
-                    Console.WriteLine("You grasp firmly on the tap and turn it shut. You frantically swipe at the plug and the water starts to gush down the drain");
-                    Console.WriteLine("As the water recedes and you plant your feet on the ground, you barely have time to breath before you hear an inhumane sound");
+                    Console.WriteLine("You grasp firmly on the tap and turn it shut. You frantically swipe at the plug and the water starts to gush down the drain.");
+                    Console.WriteLine("As the water recedes and you plant your feet on the ground, you barely have time to breath before you hear an inhumane sound.");
                 }
 
-
+                Console.WriteLine("You jump away from the bathtub as a jet of water splashes at your feet.");
+                Console.WriteLine("Water Beast: You dare turn off my source of power!?! I will swallow you alive!");
+                Console.WriteLine("The water from the tub solidifies and grows into a 6ft tall monster!");
                 Console.WriteLine();
-                Console.WriteLine("EndGame");
+                Console.WriteLine("1 - Open the door. You need more space! ~~~~~~~~");
+                Console.WriteLine("2 - Ready your weapon, it's time to fight! ~~~~~");
+                playerChoiceCheck = Console.ReadLine();
+                int.TryParse(playerChoiceCheck, out playerChoice);
+
+                while (playerChoice != 1 && playerChoice != 2)
+                {
+                    Console.Clear();
+                    Console.WriteLine();
+                    Console.WriteLine("Invalid input. Try again.");
+                    Console.WriteLine();
+                    Console.WriteLine("The water from the tub solidifies and grows into a 6ft tall monster!");
+                    Console.WriteLine();
+                    Console.WriteLine("1 - Open the door. You need more space! ~~~~~~~~");
+                    Console.WriteLine("2 - Ready your weapon, it's time to fight! ~~~~~");
+                    playerChoiceCheck = Console.ReadLine();
+                    int.TryParse(playerChoiceCheck, out playerChoice);
+                }
+
+                if (playerChoice == 1)
+                {
+                    Console.Clear();
+                }
+                else if (playerChoice == 2)
+                {
+                    Console.Clear();
+                    Console.WriteLine();
+                    Console.WriteLine("Your jabs hit nothing as the water beast twists into impossible shapes");
+                    Console.WriteLine("He strikes! Having little room to dodge, you get hit straight in the chest.");
+                    Console.WriteLine("You fall back and he hits you once more. Not having time to react, you get pummelled into the ground.");
+                    Console.WriteLine();
+                    Console.WriteLine();
+                    Console.WriteLine("                                    YOU ARE DEAD.                                                    ");
+                    Console.WriteLine("Press ENTER to close the game.");
+                    Console.ReadLine();
+                    endGame = false; //you died. exit main game loop
+                }
+
+                Console.Clear();
+                Console.WriteLine();
+                Console.WriteLine("You burst through the door and run back to the entrance area.");
+                Console.WriteLine("The water monster foolishly follows after you, leaving wet puddles trailing behind it.");
+
+
+
+                while (player.playerHealth > 0 && WaterBeast.enemyHealth > 0) //battle system, keep loop running while both fighters alive
+                {
+                    Console.Clear();
+                    Console.WriteLine();
+                    Console.WriteLine("You attack for {0} damage.", player.weaponDMG()); //call forward RNG for player
+                    Console.WriteLine("WaterBeast attacks for {0} damage.", WaterBeast.enemyDMG());//call forward RNG for enemy
+                    Console.WriteLine();
+                    if (player.weaponDMG() > 6) //some custom stuff for crits
+                    {
+                        Console.WriteLine("Critical strike!!");
+                    }
+                    else if (WaterBeast.enemyDMG() > 5)
+                    {
+                        Console.WriteLine("Splash! The monster crits!");
+                    }
+                    else if (WaterBeast.enemyDMG() > 5 && player.weaponDMG() > 6)
+                    {
+                        Console.WriteLine("Critical strike!!");
+                        Console.WriteLine("Splash! The monster crits!");
+                    }
+                    WaterBeast.enemyHealth = WaterBeast.enemyHealth - player.weaponDMG(); // damage calculation, hp remaining
+                    player.playerHealth = player.playerHealth - WaterBeast.enemyDMG();
+                    Console.WriteLine("You have {0} hp left.", player.playerHealth); //show player how much health remains
+                    Console.WriteLine("The water beast has {0} hp left.", WaterBeast.enemyHealth);
+                    Console.WriteLine();
+
+                    if (player.playerHealth > 0 && WaterBeast.enemyHealth > 0) //if fighters still alive, fight again!
+                    {
+                        Console.WriteLine("Press ENTER to attack again!");
+                        Console.ReadLine();
+                    }
+
+                }
+
+                if (player.playerHealth < 1)//if player lost fight, show this
+                {
+                    Console.ReadLine();
+                    Console.Clear();
+                    Console.WriteLine();
+                    Console.WriteLine("The water beast is able to surround you from all sides with water.");
+                    Console.WriteLine("Unknowingly to you, the water beast was constantly draining more water from the bathroom sink and gaining power.");
+                    Console.WriteLine("His tides grow ever taller, coming down on you like a waterfall.");
+                    Console.WriteLine("You see the last piece of air leave your body in the form of bubbles in front of you...");
+                    Console.WriteLine();
+                    Console.WriteLine();
+                    Console.WriteLine("                                    YOU ARE DEAD.                                                    ");
+                    Console.WriteLine("Press ENTER to close the game.");
+                    Console.ReadLine();
+                    endGame = false;//you died. exit main game loop
+
+                }
+                else if (WaterBeast.enemyHealth < 1)//enemy died, continue with story
+                {
+                    Console.ReadLine();
+                    Console.Clear();
+                    Console.WriteLine();
+                    Console.WriteLine("Although the monster had the upper hand, you've tricked him into a larger area.");
+                    Console.WriteLine("Darting this way and that, you're able to dodge all of his attacks.");
+                    Console.WriteLine("Sunlight gleaming in from the windows, the beast toasts from the effect.");
+                    Console.WriteLine("All that is left in the room is you and the steam rising slowly from the ground, where the beast once lay.");
+                    Console.WriteLine();
+                    Console.WriteLine("~~Water Beast's swag seeps out of it and is drawn to you. Your street cred increases by 5.~~");
+                    player.playerLevel = player.playerLevel + 5; //add onto players level
+                    player.playerScore = player.playerScore + WaterBeast.scoreGive();
+                    Console.WriteLine("Reputation = {0}", player.playerLevel);//show player level
+                    Console.WriteLine("Score = {0}", player.playerScore);
+                    Console.WriteLine("Press ENTER to continue.");
+                    Console.ReadLine();
+                }
+
+                Console.Clear();
+                Console.WriteLine();
+                Console.WriteLine("The steam has the effect of a sauna, and you feel better than ever.");
+                Player.hpGainX = 3; Player.hpGainY = 10; //same line because I find it better. Giving values to the healthGain method
+                player.playerHealth += player.healthGain(); //health gain. max hp can climb
+                Console.WriteLine("Health gain = {0}", player.healthGain());
+                Console.WriteLine("Health = {0}", player.playerHealth);
+                Console.WriteLine("Press ENTER to continue."); //continue
                 Console.ReadLine();
+
+                Console.WriteLine("DJKhaled: {0}, you smart. You loyal. I keep people like you around.", player.playerName);
+                Console.WriteLine("Khaled had come back into the room, wearing a life vest");
+                Console.WriteLine("'A little late to be wearing that, I've just defeated that thing!', you yell.");
+                Console.WriteLine("'Where were you! I could have used some help!'");
+                Console.WriteLine();
+                Console.WriteLine("DJKhaled: The key to success is to always be looking fly.");
+                Console.WriteLine("He has a point you know...");
+                Console.WriteLine();
+                Console.WriteLine("Press ENTER to continue.");
+                Console.ReadLine();
+
+                Console.Clear();
+                Console.WriteLine();
+                Console.WriteLine("DJKhaled takes you outside and you both jump onto his jet ski.");
+                Console.WriteLine("He takes out his phone and opens up SnapChat.");
+                Console.WriteLine("DJKhaled: Back at it again!!! This time with my homie {0}.", player.playerName);
+                Console.WriteLine();
+                Console.WriteLine("You both ride off into the sunset, your victory lap being the ocean to play with.");
+                Console.WriteLine("The only annoying part of it all is the water from the waves splashing onto your face....");
+                Console.WriteLine();
+                Console.WriteLine("Press ENTER to continue.");
+                Console.ReadLine();
+
+                Console.Clear();
+                Console.WriteLine();
+                Console.WriteLine("All of a sudden you're jolted awake by the sound of yourself choking.");
+                Console.WriteLine("You vaguely see yourself pushing your pet pug off your chest and take a look around.");
+                Console.WriteLine("You recognise your bedroom and deduce that it was all a dream. You look into the mirror.");
+                Console.WriteLine("'EEEEWWWWW, DID YOU JUST PEE ON ME???'.");
+                Console.WriteLine();
+                Console.WriteLine("What a dirty, dirty dog.");
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("                                    END GAME.                                                               ");
+                Console.WriteLine("                                THANKS FOR PLAYING.                                                         ");
+                Console.WriteLine("                                                                                                            ");
+                Console.WriteLine("                                                                                                            ");
+                Console.WriteLine("                                FINAL HEALTH ===== {0}                               ", player.playerHealth  );
+                Console.WriteLine("                                FINAL SCORE ===== {0}                                   ", player.playerScore);
+                Console.WriteLine("                                FINAL LEVEL ===== {0}                                   ", player.playerLevel);
+                Console.WriteLine("                                                                                                            ");
+                Console.WriteLine("                                                                                                            ");
+                Console.WriteLine("                                                                                                            ");
+                Console.WriteLine("                                 PRESS ENTER TO EXIT                                                        ");
+                Console.ReadLine();
+                endGame = false;
             }
 
             Console.Read();
